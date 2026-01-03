@@ -40,17 +40,17 @@ jobs:
       uses: actions/cache@v3
       with:
         path: ~/.cache/pip
-        key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+        key: ${{ runner.os }}-pip-v2-${{ hashFiles('**/requirements.txt') }}
         restore-keys: |
-          ${{ runner.os }}-pip-
+          ${{ runner.os }}-pip-v2-
     
     - name: Cache PlatformIO
       uses: actions/cache@v3
       with:
         path: ~/.platformio
-        key: ${{ runner.os }}-platformio-${{ hashFiles('**/platformio.ini') }}
+        key: ${{ runner.os }}-platformio-v2-${{ hashFiles('**/platformio.ini') }}
         restore-keys: |
-          ${{ runner.os }}-platformio-
+          ${{ runner.os }}-platformio-v2-
           
     - name: Set up Python
       uses: actions/setup-python@v4
