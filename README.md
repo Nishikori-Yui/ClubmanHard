@@ -20,9 +20,9 @@ It functions by receiving generic UDP telemetry packets (decrypted via Salsa20),
 ### Architecture
 ```mermaid
 graph LR
-    Source[UDP Telemetry Source] -- Encrypted Stream --> RPi[Raspberry Pi 5 (Logic)]
-    RPi -- Serial (UART) --> ESP32[ESP32-S3 (HID Emulator)]
-    ESP32 -- BLE --> Receiver[Host System]
+    Source["UDP Telemetry Source"] -- "Encrypted Stream" --> RPi["Raspberry Pi 5 (Logic)"]
+    RPi -- "Serial (UART)" --> ESP32["ESP32-S3 (HID Emulator)"]
+    ESP32 -- "BLE" --> Receiver["Host System"]
 ```
 
 ### Key Features

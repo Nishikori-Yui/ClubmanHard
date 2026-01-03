@@ -20,9 +20,9 @@ ClubmanHard 是一个探索 **硬件环回控制 (Hardware Loopback Control)** �
 ### 系统架构
 ```mermaid
 graph LR
-    Source[UDP 遥测源] -- 加密数据流 --> RPi[Raspberry Pi 5 (逻辑层)]
-    RPi -- 串口 (UART) --> ESP32[ESP32-S3 (HID 模拟器)]
-    ESP32 -- BLE --> Receiver[主机系统]
+    Source["UDP 遥测源"] -- "加密数据流" --> RPi["Raspberry Pi 5 (逻辑层)"]
+    RPi -- "串口 (UART)" --> ESP32["ESP32-S3 (HID 模拟器)"]
+    ESP32 -- "BLE" --> Receiver["主机系统"]
 ```
 
 ### 核心特性
