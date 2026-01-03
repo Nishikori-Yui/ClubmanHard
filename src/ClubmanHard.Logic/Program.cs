@@ -34,7 +34,6 @@ namespace ClubmanHard.Logic
             // UI Initialization
             AnsiConsole.Write(
                 new FigletText("ClubmanHard")
-                    .LeftAligned()
                     .Color(Color.Red));
 
             var rule = new Rule(debugMode ? "[yellow]DEBUG MODE[/]" : "[green]HARDWARE MODE[/]");
@@ -132,8 +131,8 @@ namespace ClubmanHard.Logic
             var inputTable = new Table().Border(TableBorder.Rounded).Title("Output");
             inputTable.AddColumn("Control");
             inputTable.AddColumn("Value");
-            inputTable.AddRow("Throttle", new BarChart().Width(20).AddItem("T", t, Color.Green));
-            inputTable.AddRow("Brake", new BarChart().Width(20).AddItem("B", b, Color.Red));
+            inputTable.AddRow(new Text("Throttle"), new BarChart().Width(20).AddItem("T", t, Color.Green));
+            inputTable.AddRow(new Text("Brake"), new BarChart().Width(20).AddItem("B", b, Color.Red));
             inputTable.AddRow("Steering", $"{s}");
             inputTable.AddRow("Boost", boost ? "[green]ON[/]" : "[grey]OFF[/]");
             inputTable.AddRow("Buttons", $"{(cross ? "X " : "")}{(dpadLeft ? "L " : "")}");

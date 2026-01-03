@@ -55,7 +55,7 @@ void processPacket() {
       int16_t steeringMapped = map(steering, -128, 127, -32767, 32767);
 
       bleGamepad.setZ(throttleMapped);
-      bleGamepad.setRz(brakeMapped);
+      bleGamepad.setRZ(brakeMapped);
       bleGamepad.setLeftThumb(steeringMapped, 0);
       bleGamepad.sendReport();
     }

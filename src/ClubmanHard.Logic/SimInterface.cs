@@ -78,8 +78,8 @@ namespace ClubmanHard.Logic
     {
         private const int Port = 33739;
         private UdpClient _udpClient;
-        private CancellationTokenSource _cts;
-        private Task _receiveTask;
+        private CancellationTokenSource? _cts;
+        private Task? _receiveTask;
 
         public TelemetryData CurrentTelemetry { get; private set; }
         public DateTime LastPacketTime { get; private set; }
