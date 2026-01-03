@@ -1,0 +1,66 @@
+name: Build ClubmanHard
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build-logic:
+    name: Build Logic (.NET 8 - ARM64)
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 8.0.x
+        
+    - name: Restore Dependencies
+      run: dotnet restore src/ClubmanHard.Logic/ClubmanHard.Logic.csproj
+      
+    - name: Publish for RPi (Linux ARM64)
+      run: dotnet publish src/ClubmanHard.Logic/ClubmanHard.Logic.csproj -c Release -r linux-arm64 --self-contained true -p:PublishSingleFile=true -o ./publish
+      
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: ClubmanHard-RPi-Build
+        path: ./publish
+
+  build-firmware:
+    name: Build Firmware (PlatformIO)
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Cache pip
+      uses: actions/cache@v3
+      with:
+        path: ~/.cache/pip
+        key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+        restore-keys: |
+          ${{ runner.os }}-pip-
+    
+    - name: Cache PlatformIO
+      uses: actions/cache@v3
+      with:
+        path: ~/.platformio
+        key: ${{ runner.os }}-platformio-${{ hashFiles('**/platformio.ini') }}
+        restore-keys: |
+          ${{ runner.os }}-platformio-
+          
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+        
+    - name: Install PlatformIO
+      run: |
+        python -m pip install --upgrade pip
+        pip install -U platformio
+        
+    - name: Build Firmware
+      run: pio run -d src/ClubmanHard.Firmware
