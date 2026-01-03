@@ -1,0 +1,21 @@
+# .NET
+bin/
+obj/
+.vs/
+*.user
+*.suo
+*.userprefs
+*.lock.json
+.DS_Store
+
+# PlatformIO
+.pio/
+.pioenvs/
+.piolibdeps/
+*.elf
+*.bin
+*.hex
+*.map
+
+# Third-Party
+third-party/
